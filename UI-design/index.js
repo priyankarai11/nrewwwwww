@@ -1,3 +1,26 @@
+function dialog(){
+    var whitebg=document.getElementById("white-background")
+    var dig=document.getElementById("digbox")
+    whitebg.style.display="none";
+    dig.style.display="none";
+}
+
+function showdialog(){
+    var whitebg=document.getElementById("white-background")
+    var dig=document.getElementById("digbox")
+    whitebg.style.display="block";
+    dig.style.display="block";
+
+    var winWidth=window.innerWidth;
+    var winHeight=window.innerHeight;
+
+    dig.style.left=(winWidth/2)-480/2 + "px";
+    dig.style.top="150px"
+
+}
+
+
+
 addEventListener('submit', e => {
     e.preventDefault();
 
@@ -92,6 +115,9 @@ if(window.Storage)
             if("Success"===data[i])
             {
                 window.open ('/admin.html', "_newtab" )
+                const heading=document.getElementById('welcome').innerHTML = 'hi';
+                console.log(heading)
+
         
                 for(let i in data)
                 {
@@ -113,7 +139,10 @@ if(window.Storage)
         
         .catch((error) => {
         console.error('Error:', error);
+
         });
+
+        
         }      
     }
 }
