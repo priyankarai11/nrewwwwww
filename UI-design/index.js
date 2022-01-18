@@ -1,23 +1,5 @@
-function dialog(){
-    var whitebg=document.getElementById("white-background")
-    var dig=document.getElementById("digbox")
-    whitebg.style.display="none";
-    dig.style.display="none";
-}
 
-function showdialog(){
-    var whitebg=document.getElementById("white-background")
-    var dig=document.getElementById("digbox")
-    whitebg.style.display="block";
-    dig.style.display="block";
 
-    var winWidth=window.innerWidth;
-    var winHeight=window.innerHeight;
-
-    dig.style.left=(winWidth/2)-480/2 + "px";
-    dig.style.top="150px"
-
-}
 
 
 
@@ -81,18 +63,29 @@ if(window.Storage)
     const email=document.getElementById("email");
     const password=document.getElementById("password");
     const submit=document.getElementById("submit")
+    const btns=document.getElementById("btns")
+    const digbox=document.getElementById("digbox")
+    const whitebg=document.getElementById("white-background")
+    const dig=document.getElementById("digbox")
 
     submit.onclick=function()
     {
         const key=email.value;
         const value=password.value;
 
+        btns.onclick=function(){
+            whitebg.style.display="none";
+            dig.style.display="none";
+            // this.parentNode.remove()
+            return false;
+        }
+        
         if(isValidEmail(key)&& isPasswordValid(value) )
         {
                     //  localStorage.setItem(key,value);
                     // location.reload();        
                     // confirm(`Hi `+ key)   'sindhujas@mailinator.com'
-
+                    // showdialog()
                 const data = { name: key, password: value };
                 fetch('https://gs-dev.qa-enphaseenergy.com/session-mgr/api/v1/admin/signin/', {
                 method: 'POST',
@@ -114,11 +107,18 @@ if(window.Storage)
             
             if("Success"===data[i])
             {
-                window.open ('/admin.html', "_newtab" )
-                const heading=document.getElementById('welcome').innerHTML = 'hi';
-                console.log(heading)
-
+                digbox.onclick=function(){
+                    // whitebg.style.display="none";
+                    // dig.style.display="none";
+                    
+                    return false;
+                }
         
+                window.open ('/admin.html', "_newtab" )
+                
+                // console.log(heading)
+               
+               
                 for(let i in data)
                 {
                     if("user_name"===i || "account_company_name"===i || "account_time_zone"===i || "roles"===i)
@@ -130,6 +130,20 @@ if(window.Storage)
             
             
             }
+
+            function showdialog(){
+                whitebg.style.display="block";
+                dig.style.display="block";
+            
+                var winWidth=window.innerWidth;
+                // var winHeight=window.innerHeight;
+            
+                dig.style.left=(winWidth/2)-480/2 + "px";
+                dig.style.top="150px"
+            
+            }
+            
+            showdialog();
 
         }
        
